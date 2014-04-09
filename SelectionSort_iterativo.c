@@ -14,25 +14,25 @@ void printlist(list_f *h);
 void freelist(list_f *h);
 void selection_sort(list_f *h);
 
-int i=0;
+int i = 0;
 
 int main()
 {
-list_f *h=NULL;
+list_f *h = NULL;
 srand(time(NULL));
 h=reclist(h);
-//printlist(h);
+printlist(h);
 selection_sort(h);
-//printlist(h);
+printlist(h);
 freelist(h);
 return 0;
 }
 
 list_f *reclist(list_f *h){
-  if((h=malloc(sizeof(list_f)))&&(i!=N)){
-    h->x=rand()%(N*100)+1;
+  if((h = malloc(sizeof(list_f))) && (i!=N)){
+    h->x = rand()%N+1;
     i++;
-    h->next=reclist(h->next);   
+    h->next = reclist(h->next);   
   }else
     h=NULL;
   return h;       
@@ -40,31 +40,31 @@ list_f *reclist(list_f *h){
 
 void printlist(list_f *h){
   if(h){
-    printf("\n%d",h->x);
+    printf("\n%d", h->x);
     return printlist(h->next);    
-  }return;
+  }
 }
 
 void freelist(list_f *h){
   if(h){
     freelist(h->next);
     free(h);
-  }return;
+  }
 }
 
 void selection_sort(list_f *h){
-  list_f *temp=NULL,*min=NULL,*tmp=NULL;
+  list_f *temp = NULL, *min = NULL, *tmp = NULL;
   int i;
-  for(tmp=h;tmp->next;tmp=tmp->next){
-    min=tmp;
-    for(temp=tmp->next;temp;temp=temp->next){
+  for(tmp = h; tmp->next; tmp = tmp->next){
+    min = tmp;
+    for(temp = tmp->next; temp; temp = temp->next){
       if(temp->x < min->x)
-        min=temp;
+        min = temp;
     }
-    if(min!=tmp){
-      i=tmp->x;
-      tmp->x=min->x;
-      min->x=i;
-    }     
-  }return;
+    if(min != tmp){
+      i = tmp->x;
+      tmp->x = min->x;
+      min->x = i;
+    }
+  }
 }

@@ -19,7 +19,7 @@ void printlist (list_f *h);
 void freelist (list_f *h);
 list_f *quicksort (list_f *h, list_f *end);
 
-int i=0;
+int i = 0;
 
 int main()
 {
@@ -74,5 +74,5 @@ list_f *quicksort(list_f *h, list_f *end){  //VERY SLOW...
     h = quicksort(h, pivot);
   if((pivot->next) && (pivot->next->next))
     pivot->next = quicksort(pivot->next, NULL);
-return h;
+  return h;
 }

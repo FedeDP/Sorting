@@ -13,63 +13,63 @@ list_f *reclist(list_f *h);
 void printlist(list_f *h);
 void freelist(list_f *h);
 void sortlist(list_f *h);
-int bubblesort(list_f *h,int swap);
+int bubblesort(list_f *h, int swap);
 
-int i=0;
+int i = 0;
 
 int main(int argc, char *argv[])
 {
 list_f *h=NULL;
 srand(time(NULL));
 h=reclist(h);
-//printlist(h);
+printlist(h);
 sortlist(h);
-//printlist(h);
+printlist(h);
 freelist(h);
 return 0;
 }
 
 list_f *reclist(list_f *h){
-  if((h=malloc(sizeof(list_f)))&&(i!=N)){
-    h->x=rand()%(N*100)+1;
+  if((h = malloc(sizeof(list_f))) && (i!=N)){
+    h->x = rand()%N+1;
     i++;
-    h->next=reclist(h->next);   
+    h->next = reclist(h->next);   
   }else
-    h=NULL;
+    h = NULL;
   return h;       
 }
 
 void printlist(list_f *h){
   if(h){
-    printf("\n%d",h->x);
+    printf("\n%d", h->x);
     return printlist(h->next);    
-  }return;
+  }
 }
 
 void freelist(list_f *h){
   if(h){
     freelist(h->next);
     free(h);
-  }return;
+  }
 }
 
 void sortlist(list_f *h){
-  list_f *temp=NULL;
-  for(temp=h->next;temp;temp=temp->next){
-    if(bubblesort(h,0)==0)
+  list_f *temp = NULL;
+  for(temp = h->next; temp; temp = temp->next){
+    if(bubblesort(h,0) == 0)
       break;
-  }return;
+  }
 }
 
-int bubblesort(list_f *h,int swap){
+int bubblesort(list_f *h, int swap){
   int tmp;
   if(h->next){
     if(h->x > h->next->x){
-      swap=1;
-      tmp=h->next->x;
-      h->next->x=h->x;
-      h->x=tmp;
+      swap = 1;
+      tmp = h->next->x;
+      h->next->x = h->x;
+      h->x = tmp;
     }
-    return bubblesort(h->next,swap);
+    return bubblesort(h->next, swap);
   }return swap;
 }
