@@ -19,7 +19,7 @@ int i = 0;
 
 int main(int argc, char *argv[])
 {
-list_f *h=NULL;
+list_f *h = NULL;
 srand(time(NULL));
 h=reclist(h);
 printlist(h);
