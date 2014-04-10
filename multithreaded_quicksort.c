@@ -3,7 +3,7 @@
 #include <pthread.h>
 #include <time.h>
 
-#define N 1000
+#define N 10000
 #define MAX_THREAD 10
 
 typedef struct list_int{
@@ -72,9 +72,12 @@ void quicksort(list_f **h, list_f *end){
       break;
   }
   if((pivot->next) && (pivot->next->next)){
-    thread_num++;
-    created=1;
-    pthread_create(&second_half_thread, NULL, (void*)second_half, &pivot->next);
+    if(thread_num < MAX_THREAD){
+      thread_num++;
+      created=1;
+      pthread_create(&second_half_thread, NULL, (void*)second_half, &pivot->next);
+    }else
+      quicksort(&pivot->next, NULL);
   }
   if(((*h) != pivot) && ((*h)->next != pivot))
     quicksort(h, pivot);
