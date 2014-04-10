@@ -2,7 +2,6 @@
 #include <stdlib.h>
 #include <time.h>
 
-
 #define N 10000
 
 typedef struct list_int{
