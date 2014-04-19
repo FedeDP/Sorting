@@ -77,7 +77,7 @@ int bubblesort(list_f *h, int swap)
 			h->next->x = h->x;
 			h->x = tmp;
 		}
-	return bubblesort(h->next, swap);
+		return bubblesort(h->next, swap);
 	}
 	return swap;
 }
