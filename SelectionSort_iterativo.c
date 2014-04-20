@@ -32,9 +32,9 @@ list_f *reclist(list_f *h)
 {
 	h = malloc(sizeof(list_f));
 	if ((h) && (i!=N)) {
-	  h->x = rand()%N+1;
-	  i++;
-	  h->next = reclist(h->next);
+		h->x = rand()%N+1;
+		i++;
+		h->next = reclist(h->next);
 	} else {
 		h=NULL;
 	}
