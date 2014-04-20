@@ -5,8 +5,8 @@
 #define N 100000
 
 typedef struct list_int {
-  int x;
-  struct list_int *next;
+	int x;
+	struct list_int *next;
 } list_f;
 
 list_f *reclist(list_f *h);
