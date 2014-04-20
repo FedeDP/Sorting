@@ -61,13 +61,13 @@ void selection_sort(list_f *h)
 {
 	list_f *temp = NULL, *min = NULL;
 	int tmp;
-	if(h->next){
+	if (h->next) {
 		min = h;
-		for(temp = h->next; temp; temp = temp->next){
-			if(temp->x < min->x)
+		for (temp = h->next; temp; temp = temp->next) {
+			if (temp->x < min->x)
 				min = temp;
 		}
-		if(min != h){
+		if (min != h) {
 			tmp = h->x;
 			h->x = min->x;
 			min->x = tmp;
