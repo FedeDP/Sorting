@@ -11,9 +11,9 @@ typedef struct {
 	int end;
 } a;
 
-void newarray(void);
-void printarray(void);
-void quicksort(a *tmp);
+static void newarray(void);
+static void printarray(void);
+static void quicksort(a *tmp);
 
 int thread_num = 0;
 int array[N];
@@ -31,21 +31,21 @@ int main(void)
 	return 0;
 }
 
-void newarray(void)
+static void newarray(void)
 {
 	int i = 0;
 	for (; i < N; i++)
 		array[i] = rand()%N + 1;
 }
 
-void printarray(void)
+static void printarray(void)
 {
 	int i = 0;
 	for (; i < N; i++)
 		printf("%d\n", array[i]);
 }
 
-void quicksort(a *tmp)
+static void quicksort(a *tmp)
 {
 	pthread_t second_half_thread;
 	int created = 0;

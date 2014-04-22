@@ -9,10 +9,10 @@ typedef struct list_int {
 	struct list_int *next;
 } list_f;
 
-list_f *reclist(list_f *h);
-void printlist(list_f *h);
-void freelist(list_f *h);
-void selection_sort(list_f *h);
+static list_f *reclist(list_f *h);
+static void printlist(list_f *h);
+static void freelist(list_f *h);
+static void selection_sort(list_f *h);
 
 int i = 0;
 
@@ -20,7 +20,7 @@ int main(void)
 {
 	list_f *h = NULL;
 	srand(time(NULL));
-	h=reclist(h);
+	h = reclist(h);
 	printlist(h);
 	selection_sort(h);
 	printlist(h);
@@ -28,7 +28,7 @@ int main(void)
 	return 0;
 }
 
-list_f *reclist(list_f *h)
+static list_f *reclist(list_f *h)
 {
 	h = malloc(sizeof(list_f));
 	if ((h) && (i != N)) {
@@ -41,7 +41,7 @@ list_f *reclist(list_f *h)
 	return h;
 }
 
-void printlist(list_f *h)
+static void printlist(list_f *h)
 {
 	if (h) {
 		printf("\n%d", h->x);
@@ -49,7 +49,7 @@ void printlist(list_f *h)
 	}
 }
 
-void freelist(list_f *h)
+static void freelist(list_f *h)
 {
 	if (h) {
 		freelist(h->next);
@@ -57,7 +57,7 @@ void freelist(list_f *h)
 	}
 }
 
-void selection_sort(list_f *h)
+static void selection_sort(list_f *h)
 {
 	list_f *temp = NULL, *min = NULL;
 	int tmp;
