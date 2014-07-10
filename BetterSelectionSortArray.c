@@ -38,9 +38,9 @@ static void printarray(void)
 static void selectionsort(void)
 {
 	int i, j, min, max, temp;
-	for (i = 0; i < N - 1; i++) {
+	for (i = 0; i < N / 2 - 1; i++) {
 		min = i;
-		max = N - 1 - i;
+		max = i;
 		for (j = i + 1; j < N - 1 - i; j++) {
 			if (array[j] < array[min])
 				min = j;
