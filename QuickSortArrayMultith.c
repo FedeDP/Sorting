@@ -4,7 +4,7 @@
 #include <time.h>
 
 #define N 100000
-#define MAX_THREAD 30
+#define MAX_THREAD 20
 
 typedef struct {
 	int init;
@@ -21,7 +21,6 @@ int array[N];
 
 int main(void)
 {
-	int dim;
 	a tmp;
 	tmp.init = 0;
 	tmp.end = N;
