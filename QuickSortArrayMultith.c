@@ -4,7 +4,7 @@
 #include <time.h>
 
 #define N 100000
-#define MAX_THREAD 20
+#define LOWEST_DISTANCE 5000
 
 typedef struct {
 	int init;
@@ -16,7 +16,6 @@ static void printarray(void);
 static void quicksort(a *tmp);
 static void selectionsort(a *tmp);
 
-int thread_num = 0;
 int array[N];
 
 int main(void)
@@ -66,25 +65,18 @@ static void quicksort(a *tmp)
 	temp.init = pivot + 1;
 	temp.end = tmp->end;
 	tmp->end = pivot;
-	if (temp.end - temp.init < N / MAX_THREAD) {
+	if (temp.end - temp.init < LOWEST_DISTANCE) {
 		selectionsort(&temp);
 	} else {
-		if (thread_num < MAX_THREAD) {
-			thread_num++;
-			created = 1;
-			pthread_create(&second_half_thread, NULL, (void *)quicksort, &temp);
-		} else {
-			quicksort(&temp);
-		}
+		created = 1;
+		pthread_create(&second_half_thread, NULL, (void *)quicksort, &temp);
 	}
-	if (tmp->end - tmp->init < N / MAX_THREAD)
+	if (tmp->end - tmp->init < LOWEST_DISTANCE)
 		selectionsort(tmp);
 	else
 		quicksort(tmp);
-	if (created) {
+	if (created)
 		pthread_join(second_half_thread, NULL);
-		thread_num--;
-	}
 }
 
 static void selectionsort(a *tmp)
