@@ -25,9 +25,9 @@ int main(void)
 	tmp.end = N;
 	srand(time(NULL));
 	newarray();
-	printarray();
+	//printarray();
 	quicksort(&tmp);
-	printarray();
+	//printarray();
 	return 0;
 }
 
@@ -50,24 +50,26 @@ static void quicksort(a *tmp)
 	pthread_t second_half_thread;
 	int created = 0;
 	a temp;
-	int pivot, i, j, x;
-	pivot = tmp->init;
+	int i, j, x;
+	int pivot_index = tmp->init;
+	int pivot_value = array[pivot_index];
 	for (i = tmp->init + 1; i < tmp->end; i++) {
-		if (array[i] < array[pivot]) {
-			for (j = i; j > tmp->init; j--) {
+		if (array[i] < pivot_value) {
+			for (j = i; j > pivot_index; j--) {
 				x = array[j - 1];
 				array[j - 1] = array[j];
 				array[j] = x;
 			}
-			pivot++;
+			pivot_index++;
 		}
 	}
-	temp.init = pivot + 1;
+	temp.init = pivot_index + 1;
 	temp.end = tmp->end;
-	tmp->end = pivot;
+	tmp->end = pivot_index;
 	if (temp.end - temp.init < LOWEST_DISTANCE) {
 		selectionsort(&temp);
 	} else {
+		quicksort(&temp);
 		created = 1;
 		pthread_create(&second_half_thread, NULL, (void *)quicksort, &temp);
 	}
