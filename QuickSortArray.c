@@ -36,21 +36,25 @@ static void printarray(void)
 
 static void quicksort(int init, int end)
 {
-	int i, j, x;
-	int pivot_index = init;
-	int pivot_value = array[pivot_index];
-	for (i = init + 1; i < end; i++) {
-		if (array[i] < pivot_value) {
-			for (j = i; j > pivot_index; j--) {
-				x = array[j - 1];
-				array[j - 1] = array[j];
-				array[j] = x;
+	int pivot, left, right, x;
+	if (end - init > 1) {
+		pivot = array[init];
+		left = init;
+		right = end;
+		while (left <= right) {
+			while (array[left] < pivot)
+				left++;
+			while (array[right] > pivot)
+				right--;
+			if (left <= right) {
+				x = array[left];
+				array[left] = array[right];
+				array[right] = x;
+				left++;
+				right--;
 			}
-			pivot_index++;
 		}
+        	quicksort(init, right);
+		quicksort(left, end);
 	}
-	if ((init != pivot_index) && (init + 1 != pivot_index))
-		quicksort(init, pivot_index);
-	if (pivot_index + 2 < end)
-		quicksort(pivot_index + 1, end);
 }
