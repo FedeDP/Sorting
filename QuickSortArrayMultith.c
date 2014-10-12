@@ -4,7 +4,7 @@
 #include <time.h>
 
 #define N 100000
-#define LOWEST_DISTANCE 5000
+#define LOWEST_DISTANCE 1000
 
 typedef struct {
 	int init;
@@ -25,9 +25,9 @@ int main(void)
 	tmp.end = N;
 	srand(time(NULL));
 	newarray();
-	//printarray();
+	printarray();
 	quicksort(&tmp);
-	//printarray();
+	printarray();
 	return 0;
 }
 
@@ -50,16 +50,18 @@ static void quicksort(a *tmp)
 	pthread_t second_half_thread;
 	int created = 0;
 	a temp;
-	int i, j, x;
+	int i, x;
 	int pivot_index = tmp->init;
 	int pivot_value = array[pivot_index];
 	for (i = tmp->init + 1; i < tmp->end; i++) {
 		if (array[i] < pivot_value) {
-			for (j = i; j > pivot_index; j--) {
-				x = array[j - 1];
-				array[j - 1] = array[j];
-				array[j] = x;
+			if (i != pivot_index + 1) {
+				array[pivot_index] = array[pivot_index + 1];
+				array[pivot_index + 1] = pivot_value;
 			}
+			x = array[pivot_index];
+			array[pivot_index] = array[i];
+			array[i] = x;
 			pivot_index++;
 		}
 	}
