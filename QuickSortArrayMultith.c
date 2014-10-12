@@ -25,9 +25,9 @@ int main(void)
 	tmp.end = N;
 	srand(time(NULL));
 	newarray();
-	printarray();
+	//printarray();
 	quicksort(&tmp);
-	printarray();
+	//printarray();
 	return 0;
 }
 

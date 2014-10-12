@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <time.h>
 
-#define N 100000
+#define N 100000000
 
 static void newarray(void);
 static void printarray(void);
@@ -42,13 +42,13 @@ static void quicksort(int init, int end)
 	if (end - init > 1) {
 		for (i = init + 1; i < end; i++) {
 			if (array[i] < pivot_value) {
+				array[pivot_index] = array[pivot_index + 1];
+				array[pivot_index + 1] = pivot_value;
 				if (i != pivot_index + 1) {
-					array[pivot_index] = array[pivot_index + 1];
-					array[pivot_index + 1] = pivot_value;
+					x = array[pivot_index];
+					array[pivot_index] = array[i];
+					array[i] = x;
 				}
-				x = array[pivot_index];
-				array[pivot_index] = array[i];
-				array[i] = x;
 				pivot_index++;
 			}
 		}
