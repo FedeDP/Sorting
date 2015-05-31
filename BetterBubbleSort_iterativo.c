@@ -1,75 +1,50 @@
 #include <stdio.h>
-#include <stdlib.h>
 #include <time.h>
+#include <stdlib.h>
 
-#define N 100000
+#define N 50000
 
-typedef struct list_int {
-	int x;
-	struct list_int *next;
-} list_f;
+static void generate_array(void);
+static void printlist(void);
+static void sortlist(void);
 
-static list_f *reclist(list_f *h);
-static void printlist(list_f *h);
-static void freelist(list_f *h);
-static void sortlist(list_f *h);
-static int bubblesort(list_f *h, int swap);
-
-int i = 0;
+int array[N];
 
 int main(void)
 {
-	list_f *h = NULL;
 	srand(time(NULL));
-	h = reclist(h);
-	printlist(h);
-	sortlist(h);
-	printlist(h);
-	freelist(h);
+    generate_array();
+	printlist();
+	sortlist();
+	printlist();
 	return 0;
 }
 
-static list_f *reclist(list_f *h)
+static void generate_array(void)
 {
-	h = malloc(sizeof(list_f));
-	if ((h) && (i != N)) {
-		h->x = rand()%N+1;
-		i++;
-		h->next = reclist(h->next);
-	} else {
-		h = NULL;
-	}
-	return h;
+    int i;
+    for (i = 0; i < N; i++)
+        array[i] = rand()%N + 1;
 }
 
-static void printlist(list_f *h)
+static void printlist(void)
 {
-	if (h) {
-		printf("\n%d", h->x);
-		return printlist(h->next);
-	}
+    int i;
+	for (i = 0; i < N; i++)
+        printf("%d\n", array[i]);
 }
 
-static void freelist(list_f *h)
+static void sortlist(void)
 {
-	if (h) {
-		freelist(h->next);
-		free(h);
-	}
-}
-
-static void sortlist(list_f *h)
-{
-	list_f *temp = NULL, *tmp = NULL;
-	int swap = 1;
-	for (tmp = h->next; (tmp) && (swap); tmp = tmp->next) {
+	int swap = 1, i, j, temp;
+	for (i = 1; (i < N) && (swap); i++) {
 		swap = 0;
-		for (temp = h; temp->next; temp = temp->next) {
-			if (temp->x > temp->next->x) {
+		for (j = i - 1; j < N - 1; j++) {
+			if (array[j] > array[j + 1]) {
 				swap = 1;
-				i = temp->next->x;
-				temp->next->x = temp->x;
-				temp->x = i;
+				temp = array[j + 1];
+				array[j + 1] = array[j];
+				array[j] = temp;
 			}
 		}
 	}
